@@ -8,7 +8,6 @@ import { createElementWithClass } from "./util/util.js"
 
 export default function Milk(width, height, settings) {
 
-	this._existingCanvas = null;
 	this._existingContainer = null;
 
 	this.title = null;
@@ -18,9 +17,11 @@ export default function Milk(width, height, settings) {
 
 	this._frameDelay = 0;
 
+	this.rendererSet = {};
+
 	if(settings != undefined) {
 		if(settings.canvas != undefined)
-			this._existingCanvas = settings.canvas;
+			this.rendererSet.canvas = settings.canvas;
 
 		if(settings.container != undefined)
 			this._existingContainer = settings.container;
@@ -33,6 +34,9 @@ export default function Milk(width, height, settings) {
 
 		if(settings.frameDelay != undefined)
 			this._frameDelay = settings.frameDelay;
+
+		if(settings.bgColor != undefined)
+			this.rendererSet.bgColor = settings.bgColor;
 	}
 
 	this.width = width;
@@ -45,10 +49,7 @@ export default function Milk(width, height, settings) {
 	this.container.style.width = width;
 	this.container.style.height = height;
 
-	if(this._existingCanvas == null)
-		this._renderer = new renderer("main_renderer", new Vector(this.width, this.height));
-	else
-		this._renderer = new renderer("main_renderer", new Vector(this.width, this.height), { canvas: this._existingCanvas });
+	this._renderer = new renderer("main_renderer", new Vector(this.width, this.height), this.rendererSet);
 
 	this.assests = new assetManager();
 

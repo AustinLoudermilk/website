@@ -35,8 +35,6 @@ Renderer.prototype.setLevel = function(lvl, settings) {
 };
 
 Renderer.prototype.init = function(container) {
-    if(this._bgColor != undefined) document.body.style.backgroundColor = this._bgColor;
-
     this.bufferDiv = createElementWithClass('div', 'buffer');
 
     this.camera.init();
@@ -45,6 +43,8 @@ Renderer.prototype.init = function(container) {
     else this.cvs = this._initCanvas;
 
     container.appendChild(this.cvs);
+
+    if(this._bgColor != undefined) container.style.backgroundColor = this._bgColor;
 
     this.ctx = this.cvs.getContext('2d');
 

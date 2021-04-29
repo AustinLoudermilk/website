@@ -99,14 +99,6 @@ export function distance(p1, p2) {
     return Math.sqrt( Math.pow((p1.x - p2.x), 2) + Math.pow((p1.y - p1.y), 2) );
 };
 
-export function numberRange(num, min, max){
-    const MIN = min || 1;
-    const MAX = max || 20;
-    const parsed = parseInt(num)
-    return Math.min(Math.max(parsed, MIN), MAX)
-  }
-
-
 export function text(ctx, text, pos, size, color, font) {
     let t = text ?? "empty";
     let c = color ?? "#000000";

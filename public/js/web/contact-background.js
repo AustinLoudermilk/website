@@ -2,7 +2,7 @@ import gVars from "../engine/global.js";
 import milk from "../engine/milk.js";
 
 import { Vector } from "../engine/util/vector.js";
-import { dRect, isMobileDevice } from "../engine/util/util.js";
+import { dRect, isMobileDevice, constrain } from "../engine/util/util.js";
 
 import mandelbrot from "./comps/mandelbrot.js";
 import Star from "./comps/star.js";
@@ -13,7 +13,8 @@ let appContainer = document.getElementById("contact-canvas");
 let app = new milk(window.innerWidth, window.innerHeight, { 
     container: appContainer, 
     static: false,
-    frameDelay: 500,
+    frameDelay: 0,
+    bgColor: "#050404"
 });
 app.setDebug(gVars.__DEBUG__);
 
@@ -33,12 +34,15 @@ app.draw = function() {
 
 app.init([], () => {
     app.stars = [];
-    //app.starAmt = 10000;
-    app.starAmt = 100;
+    app.starAmt = constrain((app.size.x * 15), 4000, 10000);
 
+    log.c(app.starAmt);
 
     for(let i = 0; i < app.starAmt; i++) {
-        let pos = new Vector((Math.floor(Math.random() * app.width)), (Math.floor(Math.random() * app.height)));
+        let x = (Math.floor(Math.random() * app.width));
+        let y = (Math.floor(Math.random() * app.height));
+        let z, v = 0;
+
         let rad = (Math.floor(Math.random() * 3));
 
         if((Math.random() * 100) > 95) rad = (Math.floor(Math.random() * 5));
@@ -48,7 +52,7 @@ app.init([], () => {
         let g = 255 - (Math.floor(Math.random() * 100));
         let b = 255 - (Math.floor(Math.random() * 100));
 
-        app.stars.push(new Star(pos.x, pos.y, 0, rad, { r: r, g: g, b: b }));
+        app.stars.push(new Star(x, y, z, v, rad, { r: r, g: g, b: b }));
     }
 
     let stars = class {
@@ -89,12 +93,12 @@ app.init([], () => {
     app.starfield = new StarField(app.size, 2, 5);
     app.starfield.addStars(800);
 
-    app._renderer.addLayer("stars", app.size, { static: false });
-    app._renderer.layers["stars"].addComponent(app.starfield);
+    app._renderer.addLayer("stars", app.size, { static: true });
+    app._renderer.layers["stars"].addComponent(app.stars);
 
     //app.lvls["main"].addLayer("mand", app.size, { static: true });
     //app.lvls["main"].layers["mand"].addComponent(app.mandset);
 
     app._renderer.addLayer("tint", app.size, { static: true });
-    //app._renderer.layers["tint"].addComponent(app.tint);
+    app._renderer.layers["tint"].addComponent(app.tint);
 });

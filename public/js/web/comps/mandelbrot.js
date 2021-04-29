@@ -1,4 +1,4 @@
-import { dRect, numberRange } from "../../engine/util/util.js";
+import { dRect, constrain } from "../../engine/util/util.js";
 import { Vector } from "../../engine/util/vector.js";
 
 export default class mandelbrot {

@@ -54,7 +54,11 @@
 }
 
 ::-webkit-scrollbar {
-  width: 1vmin;
+  width: 0.1em;
+}
+
+::-webkit-scrollbar:hover {
+  width: 0.3em;
 }
 
 /* Track */
