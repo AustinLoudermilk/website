@@ -1,0 +1,74 @@
+.title {
+  font-size: calc(8px + 2vmin);
+  color: #f6f0ed;
+}
+
+.content {
+  font-size: calc(5px + 1vmin);
+  color: #f6f0ed;
+}
+
+.flex-container {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-child {
+  flex: 1;
+
+  padding-left: 10%;
+
+  top: 50%;
+  left: 60%;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: calc(5px + 2vmin);
+  color: #f6f0ed;
+}
+
+.back-canvas-cont {
+  margin: 0;
+  padding: 0px;
+
+  position: absolute;
+  left: 0px;
+  top: 0px;
+
+  z-index: -10;
+}
+
+.Page {
+  position: relative;
+  height: 100%; 
+}
+
+::-webkit-scrollbar {
+  width: 1vmin;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 1vmin;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #f8e9e9;
+}
